@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+#This script converts SHOW ENGINE INNODB STATUS\Ginto a tabulated format

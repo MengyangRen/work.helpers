@@ -1,0 +1,17 @@
+{
+    "require": {
+        "symfony/console": "v3.4.0",
+        "fzaninotto/faker":"dev-master",
+        "dbdiff/dbdiff":"@dev",
+        "symfony/stopwatch": "^4.2"
+    }
+    ,
+    "autoload": {
+       "psr-4":{
+           "Src\\Cmd\\" : "src/command",
+           "Src\\Core\\": "src/core",
+           "Src\\Conf\\": "src/config",
+           "Src\\Util\\": "src/util"
+        }
+    }
+}

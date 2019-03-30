@@ -1,0 +1,27 @@
+server1:
+    user: root
+    password: sayhello2019
+    port: 3306 # for MySQL this is 3306
+    host: 127.0.0.1 # usually localhost or 127.0.0.1
+server2:
+    user: root
+    password: sayhello2019
+    port: 3306 # for MySQL this is 3306
+    host: 127.0.0.1 # usually localhost or 127.0.0.1
+template: ./src/data/templates/simple-db-migrate.tmpl
+type: all
+include: all
+nocomments: true
+output: ./src/data/end2end/migration_actual
+#tablesToIgnore:
+# - table1
+# - table2
+# - table3
+#fieldsToIgnore:
+#  table1:
+#    - field1
+#    - field2
+#    - field3
+#  table4:
+#    - field1
+#    - field4

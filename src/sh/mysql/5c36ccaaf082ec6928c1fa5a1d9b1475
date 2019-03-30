@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+
+#This script converts SHOW FULL PROCESSLIST\G into a tabulated format
+/usr/bin/cat "$1"  | grep State: |sort |uniq -c |sort -rn

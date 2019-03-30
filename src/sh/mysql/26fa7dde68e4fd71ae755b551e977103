@@ -1,0 +1,23 @@
+#!/usr/bin/sh
+
+#This script converts monitor javasrctpt into a tabulated format
+INTERVAL=5
+PREFIX=$INTERVAL-sec-status
+RUNFILE=/workspace-0nt1/tcp/msyql.dev/work.helpers/src/tmp/mysql-monitor-runing
+mysql -uroot -psayhello2019 -e 'SHOW GLOBAL VARIABLES' >> mysql-variables
+while test -e $RUNFILE; do
+     file=$(date +%F_%I)
+     sleep=$(date +%s.%N | awk "{print $INTERVAL -(\$1 % $INTERVAL)}")
+     sleep $sleep
+     ts="$(date +"TS %S.%N %F %T")"
+     loadavg="$(uptime)"
+     echo "$ts $loadavg" >> $PREFIX-${file}-status
+     mysql -uroot -psayhello2019  -e 'SHOW GLOBAL STATUS' >> $PREFIX-${file}-status &
+     echo "$ts $loadavg" >> $PREFIX-${file}-innodbstatus 
+     mysql -uroot -psayhello2019  -e 'SHOW ENGINE INNODB STATUS\G' >> $PREFIX-${file}-innodbstatus &
+     echo "$ts $loadavg" >> $PREFIX-${file}-processlist 
+     mysql -uroot -psayhello2019  -e 'SHOW FULL PROCESSLIST\G' >> $PREFIX-${file}-processlist &
+     echo $ts
+     #exit 0
+done
+echo Exiting because $RUNFILE does not exist.

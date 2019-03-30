@@ -1,0 +1,16 @@
+SQL_UP = u"""
+ALTER TABLE `user` ADD `uname` varchar(255) NOT NULL;
+ALTER TABLE `user` CHANGE `user_id` `user_id` bigint(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user` CHANGE `userlvl` `userlvl` smallint(11) NOT NULL DEFAULT '0';
+ALTER TABLE `user` DROP `username`;
+ALTER TABLE `user` DROP INDEX `username`;
+ALTER TABLE `user` ADD UNIQUE KEY `username` (`uname`);
+"""
+SQL_DOWN = u"""
+ALTER TABLE `user` DROP `uname`;
+ALTER TABLE `user` CHANGE `user_id` `user_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user` CHANGE `userlvl` `userlvl` int(11) NOT NULL DEFAULT '0';
+ALTER TABLE `user` ADD `username` varchar(20) NOT NULL;
+ALTER TABLE `user` DROP INDEX `username`;
+ALTER TABLE `user` ADD UNIQUE KEY `username` (`username`);
+"""

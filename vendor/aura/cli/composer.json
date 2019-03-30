@@ -1,0 +1,47 @@
+{
+    "name": "aura/cli",
+    "type": "library",
+    "description": "Provides the equivalent of request (Context) and response (Stdio) classes for a command line environment, including Getopt support.",
+    "keywords": [
+        "command",
+        "command line",
+        "cli",
+        "getopt",
+        "options",
+        "stdio"
+    ],
+    "homepage": "https://github.com/auraphp/Aura.Cli",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Aura.Cli Contributors",
+            "homepage": "https://github.com/auraphp/Aura.Cli/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aura\\Cli\\": "src/",
+            "Aura\\Cli\\_Config\\": "config/"
+        }
+    },
+    "extra": {
+        "aura": {
+            "type": "library",
+            "config": {
+                "common": "Aura\\Cli\\_Config\\Common"
+            }
+        }
+    },
+    "require-dev": {
+        "aura/di": "~2.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aura\\Cli\\": "tests/",
+            "Aura\\Di\\": "vendor/aura/di/tests/"
+        }
+    }
+}

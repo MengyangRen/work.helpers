@@ -1,0 +1,34 @@
+#!/usr/bin/sh
+
+#This script converts SHOW GLOBAL STATUS into a tabulated format
+awk '
+  BEGIN {
+     printf "#ts date time load QPS1/load QPS2 Threads_connected Threads_connected";
+     fmt = "%.2f";
+  }
+  /^TS/ {
+    ts      = substr($2,1,index($2,".")-1);
+    load    = NF -2;
+    nload = substr($load,1,length($load)-1);
+    diff    = ts - prev_ts;
+    prev_ts = ts;
+    printf "\n%s %s %s %s ",ts,$3,$4,nload;
+  }
+  /Queries/ {
+    q = $2-qp;
+    qp = $2;
+    if (diff > 0){
+       printf fmt,($2-Queries)/diff;
+       Queries = $2;
+    } else { 
+      printf fmt,0;
+      Queries = $2;
+    }
+  }
+  /Threads_connected/{
+     tc = $2
+  }
+  /Threads_running/{
+    printf " %5d %5d %5d\n ",q,tc,$2;
+  }
+' "$1"
